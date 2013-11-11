@@ -5,11 +5,39 @@ xhr.onreadystatechange = function() {
         // JSON.parse does not evaluate the attacker's scripts.
         var resp = JSON.parse(xhr.responseText);
         console.log(resp);
+        $("body").append(
+            $("<table/>",{"class":"table table-hover"})
+        );
+        $("body table").append(
+            $("<tr/>").append(
+                $("<th/>").append(
+                    "URL"
+                ),
+                $("<th/>").append(
+                    "StartDate"
+                ),
+                $("<th/>").append(
+                    "EndDate"
+                )
+            )
+        );
         for(var i in resp) {
-            $("body").append(
-                $("<div/>").append(
-                    $("<a/>",{"href":resp[i].sourceWebPromote}).append(
-                        i +". " + resp[i].title
+            $("body table").append(
+                $("<tr/>").append(
+                    $("<td/>").append(
+                        $("<a/>",{"href":resp[i].sourceWebPromote}).append(
+                            resp[i].title
+                        )
+                    ),
+                    $("<td/>").append(
+                        $("<p/>").append(
+                            resp[i].startDate
+                        )
+                    ),
+                    $("<td/>").append(
+                        $("<p/>").append(
+                            resp[i].endDate
+                        )
                     )
                 )
             );
